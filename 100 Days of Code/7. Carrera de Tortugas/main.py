@@ -7,7 +7,7 @@
 Crea una carrera de tortugas aleatoria con turtle. 
 Crea un pop-up inicial para apostar por la tortuga ganadora antes de empezar la carrera.
 Setea la pantalla a 500x400.
-Printea al final si hemos ganado o perdido y qujé tortuga ha ganado la carrera.
+Printea al final si hemos ganado o perdido y qujé tortuga ha ganado la carrera. 
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
 """
