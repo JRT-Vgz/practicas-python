@@ -20,6 +20,7 @@ from pygame import mixer
 # Setea la pantalla y su tamaño.
 screen = Screen()
 screen.setup(width = 500, height = 400)
+screen.title("                                                   CARRERA DE TORTUGAS")
 
 # Setea la musica
 mixer.init()
