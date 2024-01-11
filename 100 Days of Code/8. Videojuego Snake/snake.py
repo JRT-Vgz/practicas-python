@@ -1,5 +1,6 @@
 
 from turtle import Turtle
+import pantalla
 import time
 
 POSICIONES_INICIALES = [(0, 0), (-20, 0), (-40, 0)]
@@ -21,11 +22,15 @@ class Snake:
     # Función para crear la serpiente:
     def crea_serpiente(self):
         for posicion in POSICIONES_INICIALES:
-            snake = Turtle(shape = "square")
-            snake.color("white")
-            snake.penup()
-            snake.goto(posicion)
-            self.segmentos.append(snake)
+            self.crea_segmento(posicion)
+    
+    # Funcion para crear un segmento.   
+    def crea_segmento(self, posicion):
+        snake = Turtle(shape = "square")
+        snake.color("white")
+        snake.penup()
+        snake.goto(posicion)
+        self.segmentos.append(snake)
             
     # Función para el movimiento automático de la serpiente.
     def moverse_auto(self):
@@ -63,13 +68,18 @@ class Snake:
             return False
         return True
                
-    # Funcion para comer.
-    def crea_segmento(self):
-        snake = Turtle(shape = "square")
-        snake.color("white")
-        snake.penup()
-        posicion = (self.segmentos[len(self.segmentos) -1].xcor(), self.segmentos[len(self.segmentos) -1].ycor())
-        snake.goto(posicion)
-        self.segmentos.append(snake)
-        
-            
+    # Funcion para extender la serpiente.
+    def extender(self):
+        posicion = (self.segmentos[-1].xcor(), self.segmentos[-1].ycor())
+        self.crea_segmento(posicion)
+    
+    # Funcion para detectar si hemos chocado con un muro.    
+    def choca_con_muro(self):
+        if self.cabeza.xcor() > (pantalla.ANCHO_PANTALLA / 2) or self.cabeza.xcor() < -(pantalla.ANCHO_PANTALLA / 2) or self.cabeza.ycor() > (pantalla.ALTO_PANTALLA / 2) or self.cabeza.ycor() < -(pantalla.ALTO_PANTALLA / 2):
+           return True 
+    
+    # Funcion para detectar si hemos chocado conb algún segmento de la cola.  
+    def choca_con_cola(self):
+        for segmento in self.segmentos[1:]:
+            if self.cabeza.distance(segmento) < 10:
+                return True

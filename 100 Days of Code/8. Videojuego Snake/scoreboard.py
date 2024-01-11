@@ -31,3 +31,7 @@ class Scoreboard(Turtle):
     def resetea_scoreboard(self):
         self.score = 0
         self.actualiza_scoreboard()
+        
+    def game_over(self):
+        self.goto(0, 0)
+        self.write("GAME OVER", align = ALINEACION, font = FUENTE)

@@ -1,13 +1,16 @@
 
 from turtle import Screen
 
-class Pantalla:
-    
-    screen = ""
+ANCHO_PANTALLA = 590
+ALTO_PANTALLA = 590
+
+class Pantalla:   
     # Configura la pantalla en el init.
     def __init__(self):
         self.screen = Screen()
-        self.screen.setup(width = 600, height = 600)
+        self.ancho = ANCHO_PANTALLA
+        self.alto = ALTO_PANTALLA
+        self.screen.setup(width = self.ancho, height = self.alto)
         self.screen.bgcolor("black")
         self.screen.title("                                                                                    SNAKE")
         # Método para que no refresque la pantalla hasta que llamemos un update.
