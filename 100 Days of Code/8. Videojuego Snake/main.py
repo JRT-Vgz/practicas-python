@@ -23,8 +23,6 @@ from comida import Comida
 from scoreboard import Scoreboard
 from pygame import mixer
 
-def ola():
-    print("ola")
 # SETEA LOS SONIDOS.
 mixer.init()
 def lanza_sonido(cancion, volumen):
@@ -54,8 +52,7 @@ def main():
         time.sleep(0.1)   
         serpiente.moverse_auto()
         
-        # Movimientos por evento. Se puede jugar con flechas o WASD:
-        
+        # Movimientos por evento. Se puede jugar con flechas o WASD:       
         t.onkeypress(serpiente.arriba, "Up")
         t.onkeypress(serpiente.izquierda, "Left")
         t.onkeypress(serpiente.abajo, "Down")
