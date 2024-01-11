@@ -17,6 +17,12 @@ from turtle import Turtle, Screen
 import random
 from pygame import mixer
 
+ALINEACION = "center"
+FUENTE = "Arial"
+TAMANO_FUENTE = 16
+TIPO_FUENTE = "normal"
+FUENTE = (FUENTE, TAMANO_FUENTE, TIPO_FUENTE)
+
 # Setea la pantalla y su tamaño.
 screen = Screen()
 screen.setup(width = 500, height = 400)
@@ -52,7 +58,8 @@ for color_ingles in colores.values():
 # Define la logica del movimiento random.
 def movimiento_random(tortuga):
     if random.randint(1, 8) == 1:
-        pasos = random.randint(1, 5)
+        #pasos = random.randint(1, 5)
+        pasos = 50
         tortuga.forward(pasos)
         
 # Crea el bucle de la carrera.
@@ -73,7 +80,6 @@ for color, color_ingles in colores.items():
         break
                 
 # Resuelve la apuesta.
-cambia_cancion("finish.mp3", 0.1)
 texto_final = ""
 if apuesta.upper() == tortuga_ganadora.upper():
     texto_final += "¡Has ganado! "
@@ -81,6 +87,16 @@ else:
     texto_final += "¡Has perdido! "
 texto_final += "La tortuga ganadora es la " + tortuga_ganadora + "."
 print(texto_final)
+
+# Crea un texto en la pantalla con el resultado.
+resultado = Turtle()
+resultado.penup()      
+resultado.hideturtle()
+resultado.speed("fastest")
+resultado.goto(0, 160)
+resultado.write(texto_final, align = ALINEACION, font = FUENTE)
+
+cambia_cancion("finish.mp3", 0.1)
             
 # Configura la pantalla para salir del programa con click.
 screen.exitonclick()
