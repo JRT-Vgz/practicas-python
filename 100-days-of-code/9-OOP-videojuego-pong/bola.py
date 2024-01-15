@@ -50,7 +50,7 @@ class Bola(Turtle):
         # Usamos la variable para desbugear que se de muchos golpes con el mismo palo.
         if self.cuenta_atras == 0:
             self.direccion_x *= -1
-            #self.direccion_y = self.randomizar_direccion_y()
+            self.direccion_y = self.randomizar_direccion_y()
             self.velocidad *= 0.9
             self.cuenta_atras = 30
         
