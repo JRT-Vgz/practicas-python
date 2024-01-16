@@ -83,3 +83,9 @@ class Snake:
         for segmento in self.segmentos[1:]:
             if self.cabeza.distance(segmento) < 10:
                 return True
+    
+    # Funcion para resetear la serpiente.        
+    def resetea_serpiente(self):
+        for segmento in self.segmentos:
+            segmento.hideturtle()
+        self.__init__()

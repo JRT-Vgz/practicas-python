@@ -82,15 +82,15 @@ def main():
             # Lanza el sonido.
             lanza_sonido("recoger.mp3", 0.1)
             
-        # Detectar la colisión con el mur o la cola.
+        # Detectar la colisión con el muro o la cola.
         if serpiente.choca_con_muro() or serpiente.choca_con_cola():
-            juego_terminado = True
-            scoreboard.game_over()
+            # Resetea scoreboard.
+            scoreboard.resetea_scoreboard()
             screen.updatear_pantalla()
             # Lanza el sonido.
             lanza_sonido("game_over.mp3", 0.1)
-            # Resetea scoreboard.
-            scoreboard.resetea_scoreboard()
+            time.sleep(1)
+            serpiente.resetea_serpiente()
     time.sleep(1)
     main()
    
