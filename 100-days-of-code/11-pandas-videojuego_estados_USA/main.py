@@ -71,10 +71,7 @@ while len(lista_aciertos) < 50:
     
     # Si el input es "Exit", termina el juego y crea un csv con los estados que faltan.
     if respuesta == "Exit":
-        lista_faltas = []
-        for estado in lista_estados:
-            if estado not in lista_aciertos:
-                lista_faltas.append(estado)
+        lista_faltas = [estado for estado in lista_estados if estado not in lista_aciertos]
         nuevo_df = pandas.DataFrame(lista_faltas)
         nuevo_df.to_csv("estados_para_aprender.csv")
         break
