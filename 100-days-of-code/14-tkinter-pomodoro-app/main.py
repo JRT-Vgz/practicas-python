@@ -27,9 +27,9 @@ TIPO_FUENTE = "Courier"
 TAMANO_FUENTE = 25
 MOD_FUENTE = "bold"
 FUENTE = (TIPO_FUENTE, TAMANO_FUENTE, MOD_FUENTE)
-MINUTOS_TRABAJO = 1
-TIEMPO_DESCANSO_CORTO = 1
-TIEMPO_DESCANSO_LARGO = 1
+MINUTOS_TRABAJO = 25
+TIEMPO_DESCANSO_CORTO = 5
+TIEMPO_DESCANSO_LARGO = 20
 
 reps = 0
 evento_contando = None
@@ -82,7 +82,7 @@ def cuenta_atras(tiempo):
     #Actualiza el contador y vuelve a llamar la funcion hasta que se acabe el tiempo.
     canvas.itemconfig(texto_contador, text = tiempo_restante)
     if tiempo > 0:
-        evento_contando = window.after(100,cuenta_atras,tiempo - 1)
+        evento_contando = window.after(1000,cuenta_atras,tiempo - 1)
     else:
         empieza_contador()
         # Iteramos por la cantidad de veces que hemos completado un ciclo para añadir un tic.
@@ -117,7 +117,7 @@ canvas.create_image(100, 112, image = tomate)
 texto_contador = canvas.create_text(103, 130, text = "00:00", fill = "white", font = FUENTE)
 canvas.grid(column = 1, row = 1)
 
-# CONFIGURACION DEDL LABEL Y LOS BOTONES.
+# CONFIGURACION DEL LABEL Y LOS BOTONES.
 titulo = Label(text = "Contador", font = FUENTE, bg = AMARILLO, fg = VERDE)
 titulo.grid(column = 1, row = 0)
 
