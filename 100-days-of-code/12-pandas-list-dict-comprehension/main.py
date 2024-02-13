@@ -20,10 +20,16 @@ data_frame = pandas.read_csv("nato_phonetic_alphabet.csv")
 code_dict = {row.letter: row.code for (index, row) in data_frame.iterrows()}
 
 # Crea el input y decodifica la palabra en una lista.
-# Forma mas larga.
-palabra = input("Escribe una palabra: ").upper()
-code_list = [code_dict[letra] for letra in palabra]
-print(code_list)
+while True:
+    # Forma mas larga.
+    palabra = input("Escribe una palabra: ").upper()
+    try:
+        code_list = [code_dict[letra] for letra in palabra]
+    except KeyError:
+        print("Error: Escribe solo letras del alfabeto.\n")
+    else:
+        print(code_list)
+        break
 
 # Forma mas corta.
 """

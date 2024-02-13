@@ -24,6 +24,8 @@ def cuadrado():
 
     screen = Screen()
     screen.exitonclick()
+#cuadrado()
+   
     
 # 2. Dibuja una linea recta intermitente de 10 cada sección.
 # python -c "from main import intermitente; intermitente()"
@@ -41,6 +43,8 @@ def intermitente():
 
     screen = Screen()
     screen.exitonclick()
+#intermitente()
+
     
 # 3. Dibuja un triangulo, cuadradfo, pentagono, hexagono, heptagono, octagono, nonagono y decagono. Todos partiendo del mismo vertice.
 # TIP: el angulo se consigue dividiendo 360 entre el numero de lados. EJ: Cuadrado = 360 / 4 = 90 grados cada giro.
@@ -61,6 +65,8 @@ def formasGeo():
     
     screen = Screen()
     screen.exitonclick()
+#formasGeo()
+
 
 # Otra solucion:
 # python -c "from main import formasGeo2; formasGeo2()"
@@ -79,6 +85,7 @@ def formasGeo2():
         
     screen = Screen()
     screen.exitonclick()
+#formasGeo2()
     
     
 # 4. Random walk. Randomiza la dirección de la tortuga. Cambiale el color a uno aleatorio a cada paso.
@@ -105,6 +112,8 @@ def random():
     
     screen = Screen()
     screen.exitonclick()
+#random()
+
     
 # Otra solucion:
 # python -c "from main import random2; random2()"
@@ -122,7 +131,9 @@ def random2():
         
     screen = Screen()
     screen.exitonclick()
-    
+#random2()
+
+   
 # 5. Haz el mismo ejercicio de antes, pero creando colores totalmente random en cada paso.
 # python -c "from main import random3; random3()"
 def random3():
@@ -145,6 +156,8 @@ def random3():
         
     screen = Screen()
     screen.exitonclick()
+#random3()
+
     
 # 6. Dibuja un spirograph, dibuja un circulo de radio 100 en cada paso hasta completar la forma. Ponle un color random cada vez.
 # python -c "from main import spiro; spiro()"
@@ -169,6 +182,8 @@ def spiro():
     
     screen = Screen()
     screen.exitonclick()
+#spiro()
+
     
 # Otra solucion:
 # python -c "from main import spiro2; spiro2()"
@@ -194,3 +209,4 @@ def spiro2():
     
     screen = Screen()
     screen.exitonclick()
+#spiro2()

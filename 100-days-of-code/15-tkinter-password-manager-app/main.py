@@ -8,15 +8,15 @@ Pasos.
 1. Configuracion de la UI.
 2. Funcion para guardar la contraseña.
 3. Crear pop-ups de confirmación y error.
-3. Funcion para generar una contraseña aleatoria.
-4. Retoques finales.
+4. Funcion para generar una contraseña aleatoria.
+5. Retoques finales.
 --------------------------------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------------------------------
 """
 
 from tkinter import *
 from tkinter import messagebox
-import os
+import json
 import re
 import random
 import pyperclip
@@ -36,50 +36,62 @@ def save_password():
     password = pass_input.get()
     
     if is_any_field_empty(website, email, password):
-        messagebox.showinfo(title="Oops", message="Please don't leave any fields empty!")
-        return
+        return messagebox.showinfo(title="Oops", message="Please don't leave any fields empty!")
     
     if not confirm_entry_data(website, email, password):
         return
     
-    create_file_if_doesnt_exist()
+    data = {}
+    new_data = {
+        website: {
+            "email": email,
+            "password": password,
+        }
+    }
     
-    with open("password.txt") as file:
-        data = file.readlines()
-    
-    if website_already_registered(website, data):
-        messagebox.showerror(title="Error", message=f"The website {website} already exists in the database.")
-        return
-       
-    text = f"{website} | {email} | {password}\n"
-    data.append(text) 
-       
-    with open("password.txt", "w",) as file:
-        file.writelines(data)
+    try:
+        with open("password.json") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        pass
+      
+    data.update(new_data)
+    with open("password.json", "w",) as file:
+        json.dump(data, file, indent = 4)
 
     website_input.delete(0, END)
     pass_input.delete(0, END)
 
 
-def is_any_field_empty(website, email, password):
-    return len(website) == 0 or len(email) == 0 or len(password) == 0
+def is_any_field_empty(*args):
+    for arg in args:
+        if len(arg) == 0:
+            return True
 
 
 def confirm_entry_data(website, email, password):
     return messagebox.askokcancel(title="Confirm data entry", message=f"These are the details entered:\n\nWebsite: {website}\nEmail: {email}\nPassword: {password}\n\nIs it ok to save?")
 
 
-def create_file_if_doesnt_exist():
-    file = os.path.join(os.getcwd(), "password.txt")
-    if not os.path.exists(file):
-        with open("password.txt", "w",) as file:
-            pass
+# ---------------------------- BUSCADOR DE CONTRASEÑAS ------------------------------- #
+def search_password():
+    website = website_input.get()
+    if is_any_field_empty(website):
+        return messagebox.showinfo(title="Oops", message="Please don't leave the website field empty!")
 
-def website_already_registered(website, data):
-    pattern = fr"^{website} \|"    
-    for line in data:
-        if re.match(pattern, f"{line} | "):
-            return True
+    try:
+        with open("password.json") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        return messagebox.showinfo(title="Error", message="No Data File Found.")
+
+    if website in data:
+        pyperclip.copy(data[website]['password'])
+        website_input.delete(0, END)
+        pass_input.delete(0, END)
+        return messagebox.showinfo(title="Password found", message=f"Website: {website}\nEmail: {data[website]['email']}\nPassword: {data[website]['password']}")
+    else:
+        return messagebox.showinfo(title="Error", message=f"No details for {website} exists.")
 
 
 # ---------------------------- GENERADOR DE CONTRASEÑAS ------------------------------- #
@@ -121,9 +133,8 @@ data_label.grid(column = 0, row = 2)
 pass_label = Label(text = "Password:", bg = WHITE)
 pass_label.grid(column = 0, row = 3)
 
-##### poner padding vertical pequeño para que los campos no esten tan apelotonados
-website_input = Entry(width = 43)
-website_input.grid(column = 1, row = 1, columnspan = 2, padx =(2,0))
+website_input = Entry(width = 25)
+website_input.grid(column = 1, row = 1, padx =(2,0))
 website_input.focus()
 email_input = Entry(width = 43)
 email_input.grid(column = 1, row = 2, columnspan = 2, padx =(2,0))
@@ -131,7 +142,8 @@ email_input.insert(0, DEFAULT_EMAIL)
 pass_input = Entry(width = 25)
 pass_input.grid(column = 1, row = 3, padx = (0,0))
 
-
+search_button = Button(text = "Search", width = 11, command = search_password)
+search_button.grid(column = 2, row = 1, padx = (0,23))
 generate_pass_button = Button(text = "Generate Pass", command = generate_password)
 generate_pass_button.grid(column = 2, row = 3, padx = (0,23))
 add_button = Button(text = "Add", width = 36, command = save_password)
