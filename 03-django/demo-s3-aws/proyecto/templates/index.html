@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Subir Imagen</title>
+
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="container mx-auto mt-8 p-4 bg-white rounded-lg shadow-md">
+            <h1 class="text-2x1 font semibold mb-4">Subir Imagen</h1>
+
+            <form method="post" enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+                <div class="flex items-center space-x-2">
+                    <label for="imagen" class="text-gray-600">Seleccionar Imagen</label>
+                    <input type="file" name="imagen" id="imagen" accept="image/*" class="py-2 px-4 border border-gray-300 rounded-md">
+                </div>
+                <button type="submit" class="bg-blue-500 gover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md">Subir Imagen</button>
+            </form>
+
+            {% if image_url %}
+            <h2 class="text-x1 mt-4">Imagen Cargada:</h2>
+            <img src="{{ image_url }}" alt="Imagen Cargada" class="mt-2 max-w-full">
+            {% endif %}
+        </div>
+    </body>
+</html>

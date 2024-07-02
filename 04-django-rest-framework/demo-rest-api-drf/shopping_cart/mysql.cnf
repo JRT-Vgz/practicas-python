@@ -1,0 +1,7 @@
+[client]
+database = demo_api_rest_drf
+user = root
+password = jebimalo666
+host = localhost
+port = 3306
+default-character-set = utf8
