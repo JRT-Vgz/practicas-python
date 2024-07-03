@@ -1,1 +1,1 @@
-Practicas, ejemplos y pruebas de Python y sus frameworks.
+Practicas, ejemplos y pruebas con Python y sus frameworks.
