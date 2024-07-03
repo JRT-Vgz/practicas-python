@@ -1,1 +1,1 @@
-ola
+Practicas, ejemplos y pruebas de Python y sus frameworks.
